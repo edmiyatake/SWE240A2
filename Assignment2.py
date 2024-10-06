@@ -14,8 +14,18 @@ class Stack:
     def size(self):
         return len(self.data)
 
+    def printStack(self):
+        for i in range(len(self.data)):
+            print(self.data[i])
+        return 0
+
 def calculator(str):
     newStack = Stack()
+    for char in str:
+        newStack.push(char)
+    newStack.printStack()
+    return -1
+
     
 
 class Queue:
@@ -43,8 +53,21 @@ class Queue:
         return len(self.data) - self.front
 
 class stackWithTwoQs:
-    exit
+    def __init__(self):
+        self.queueOne = Queue()
+        self.queueTwo = Queue()
     
+    def push(self,x):
+        exit
+
+    def pop(self):
+        exit
+    
+    def peek(self):
+        exit
+    
+    def size(self):
+        exit
 
 # TASK 1 TEST CASES
 # newStack = Stack()
@@ -77,3 +100,4 @@ class stackWithTwoQs:
 # print(newQueue.poll())
 
 # TASK 4 TEST CASES
+print(calculator("50 + 67 * 42"))
