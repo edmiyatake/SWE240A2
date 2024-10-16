@@ -2,6 +2,9 @@ class Stack:
     def __init__(self):
         self.data = []
     
+    def isEmpty(self):
+        return len(self.data) == 0
+    
     def push(self,element):
         self.data.append(element)
  
@@ -41,7 +44,7 @@ def equationSolver(eq):
                 print("Nan => STRING IN EQUATION")
                 return None
 
-        while numbers:
+        while not operators.isEmpty():
             numerand1 = int(numbers.pop())
             numerand2 = int(numbers.pop())
             if operators.size() > 0:
@@ -49,15 +52,20 @@ def equationSolver(eq):
             else:
                 break
             if op == "+":
-                numbers.push(numerand1 + numerand2)
+                numbers.push(numerand2 + numerand1)
+                continue
             elif op == "-":
-                numbers.push(numerand1 - numerand2)
+                numbers.push(numerand2 - numerand1)
+                continue
             if op == "*":
-                numbers.push(numerand1 * numerand2)
+                numbers.push(numerand2 * numerand1)
+                continue
             elif op == "/":
-                numbers.push(numerand1 / numerand2)
+                numbers.push(numerand2 / numerand1)
+                continue
             else:
                 break
+
         return numbers.printStack()
 
 # the viable way I see that task 2 has to work
@@ -85,5 +93,9 @@ def equationSolver(eq):
 # TASK 2 TEST CASES
 eq1 = "10 + 20 * 2"
 eq2 = "foo / 30 + 7"
+eq3 = "10 + 20 - 47 * 2"
+eq4 = "28 / 4"
 equationSolver(eq1)
 equationSolver(eq2)
+equationSolver(eq3)
+equationSolver(eq4)
