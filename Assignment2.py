@@ -26,17 +26,39 @@ class Stack:
         return 0
     
 def equationSolver(eq):
+        # Goal is to split the numbers from the operators
         numbers = Stack()
         operators = Stack()
+        equation = eq.split()
 
-        for term in eq:
-            if term == "+" or term == "-" or term == "*" or term == "/":
+        for term in equation:
+            if term.isdigit():
+                numbers.push(term)
+            elif term == "+" or term == "-" or term == "*" or term == "/":
                 operators.push(term)
             else:
-                numbers.push(term)
-        numbers.printStack()
-        operators.printStack()
-        return 
+                # anything needs to return Nan or None
+                print("Nan => STRING IN EQUATION")
+                return None
+
+        while numbers:
+            numerand1 = int(numbers.pop())
+            numerand2 = int(numbers.pop())
+            if operators.size() > 0:
+                op = operators.pop()
+            else:
+                break
+            if op == "+":
+                numbers.push(numerand1 + numerand2)
+            elif op == "-":
+                numbers.push(numerand1 - numerand2)
+            if op == "*":
+                numbers.push(numerand1 * numerand2)
+            elif op == "/":
+                numbers.push(numerand1 / numerand2)
+            else:
+                break
+        return numbers.printStack()
 
 # the viable way I see that task 2 has to work
 # a fucntion that takes in an equation and returns the solution
@@ -64,3 +86,4 @@ def equationSolver(eq):
 eq1 = "10 + 20 * 2"
 eq2 = "foo / 30 + 7"
 equationSolver(eq1)
+equationSolver(eq2)
