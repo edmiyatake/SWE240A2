@@ -24,21 +24,25 @@ class Stack:
         for i in range(len(self.data)):
             print(self.data[i])
         return 0
+    
+def equationSolver(eq):
+        numbers = Stack()
+        operators = Stack()
+
+        for term in eq:
+            if term == "+" or term == "-" or term == "*" or term == "/":
+                operators.push(term)
+            else:
+                numbers.push(term)
+        numbers.printStack()
+        operators.printStack()
+        return 
 
 # the viable way I see that task 2 has to work
 # a fucntion that takes in an equation and returns the solution
 # problem:
 # 1. I can put numbers and operands into different stacks but I need to know the order in which I apply them
 # helper function?
-
-def order(command):
-    if command == "*" or command ="/":
-        return 10
-    elif command == "+" or command == "-":
-        return 1
-    else:
-        # invalid command
-        return -1
 
     
 
@@ -57,3 +61,6 @@ def order(command):
 # print(newStack.size())
 
 # TASK 2 TEST CASES
+eq1 = "10 + 20 * 2"
+eq2 = "foo / 30 + 7"
+equationSolver(eq1)
