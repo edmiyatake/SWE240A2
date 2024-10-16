@@ -1,43 +1,57 @@
 class Queue:
     def __init__(self):
-        self.front = 0
         self.data = []
     
     def enqueue(self,element):
         self.data.append(element)
     
+    def isEmpty(self):
+        return len(self.data) == 0
+    
     def dequeue(self):
-        if self.size() == 0:
+        if self.isEmpty():
             raise Exception("Queue is empty")
         else:   
-            solution = self.data[self.front]
-            self.data[self.front] = None
-            self.front += 1
-            return solution
+            return self.data.pop(0)
             
-    
     def poll(self):
-        return self.data[self.front]
+        return self.data[0]
     
     def size(self):
-        return len(self.data) - self.front
+        return len(self.data)
 
 class stackWithTwoQs:
     def __init__(self):
         self.queueOne = Queue()
         self.queueTwo = Queue()
     
-    def push(self,x):
-        exit
+    def isEmpty(self):
+        return self.queueOne.size() == 0
+    
+    def push(self,val):
+        # Queues are first in first out and Stacks are last in first out
+        # i think the best way to do this is to treat queueOne as the back and queueTwo as the front
+        self.queueTwo.enqueue(val)
+
+        while not self.queueOne.isEmpty():
+            self.queueTwo.enqueue(self.queueOne.dequeue())
+        
+        self.queueOne,self.queueTwo = self.queueTwo, self.queueOne
+        
 
     def pop(self):
-        exit
-    
+        if self.queueOne.isEmpty():
+            raise IndexError("Empty Stack")
+        else:
+            self.queueOne.dequeue()
+        
     def peek(self):
-        exit
+        if self.queueOne:
+            return self.queueOne.poll()
+        return None
     
     def size(self):
-        exit
+        return self.queueOne.size()
 
 # TASK 3 TEST CASES 
 # newQueue = Queue()
@@ -52,3 +66,13 @@ class stackWithTwoQs:
 # print(newQueue.size())
 # print(newQueue.dequeue())
 # print(newQueue.poll())
+
+# Task 4 Test Cases
+newStack = stackWithTwoQs()
+newStack.push(26)
+newStack.push(46)
+newStack.push(23)
+newStack.push(656)
+newStack.push(216)
+print(newStack.peek())
+print(newStack.size())
